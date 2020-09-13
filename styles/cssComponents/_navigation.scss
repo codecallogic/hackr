@@ -25,10 +25,14 @@
             }
 
             &:hover {
-                background-color: #F7C244;
+                background-color: var(--color-primary);
                 padding: 1.6rem 0;
             }
             
         }
     }
+}
+
+#nprogress .bar {
+    height: .6rem!important;
 }

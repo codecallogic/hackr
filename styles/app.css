@@ -1,3 +1,6 @@
+:root {
+  --color-primary: #F7C244; }
+
 .nav {
   display: flex; }
   .nav-logo {
@@ -17,5 +20,31 @@
         padding: 0 2rem;
         color: black; }
       .nav-list-item:hover {
-        background-color: #F7C244;
+        background-color: var(--color-primary);
         padding: 1.6rem 0; }
+
+#nprogress .bar {
+  height: 0.6rem !important; }
+
+.registration {
+  display: grid;
+  justify-content: center;
+  padding: 5rem 0 0 0;
+  grid-gap: 4rem; }
+  .registration-heading {
+    font-size: 4rem; }
+  .registration-form {
+    display: grid;
+    grid-template-columns: minmax(min-content, 35rem);
+    grid-gap: 2rem; }
+    .registration-form-input {
+      width: 100%;
+      height: 5.5rem;
+      font-size: 2rem;
+      padding: 1rem;
+      border: none;
+      border-bottom: .2rem solid black;
+      transition: all .5s; }
+      .registration-form-input:focus {
+        outline: none;
+        border-bottom: 0.4rem solid var(--color-primary); }
