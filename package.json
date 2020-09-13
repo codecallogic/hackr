@@ -5,11 +5,17 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "watch:css": "node-sass styles/main.scss styles/app.css -w"
   },
   "dependencies": {
     "next": "9.5.3",
+    "nprogress": "^0.2.0",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "react-router-dom": "^5.2.0"
+  },
+  "devDependencies": {
+    "node-sass": "^4.14.1"
   }
 }
