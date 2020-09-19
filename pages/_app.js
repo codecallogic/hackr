@@ -14,6 +14,14 @@ function MyApp({ Component, pageProps }) {
     <Head>
         <React.Fragment>
         <title>Hackr</title>
+        <link
+          href="//fonts.googleapis.com/css?family=Poppins:300,400,500,600,700%7CRoboto:300,400,500,600,700"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet"
+        />
         </React.Fragment>
     </Head>
     <Component {...pageProps} />
