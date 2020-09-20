@@ -1,5 +1,6 @@
 :root {
-  --color-primary: #F7C244; }
+  --color-primary: #F7C244;
+  --color-grey-dark: #52595F; }
 
 .nav {
   display: flex; }
@@ -43,11 +44,23 @@
       font-size: 2rem;
       padding: 1rem;
       border: none;
-      border-bottom: .2rem solid black;
-      transition: all .5s; }
+      border-bottom: .1rem solid black; }
       .registration-form-input:focus {
         outline: none;
-        border-bottom: 0.4rem solid var(--color-primary); }
+        border-bottom: 0.2rem solid var(--color-grey-dark); }
+    .registration-form-button {
+      margin: 1rem 0;
+      padding: 1rem;
+      font-size: 1.5rem;
+      background-color: var(--color-grey-dark);
+      color: white;
+      border: none;
+      transition: all .5s; }
+      .registration-form-button:hover {
+        background-color: var(--color-primary);
+        color: var(--color-grey-dark);
+        border: none;
+        cursor: pointer; }
 
 .contactpage {
   display: grid;
