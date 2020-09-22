@@ -4,9 +4,9 @@ import axios from 'axios'
 
 function Register() {
     const [state, setState] = useState({
-        name: '',
-        email: '',
-        password: '',
+        name: 'Jose',
+        email: 'jfguardiacp@gmail.com',
+        password: 'aaaaaa',
         error: '',
         success: '', 
         buttonText: 'Register'
@@ -20,13 +20,26 @@ function Register() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setState({...state, buttonText: 'Registering'})
         axios.post('http://localhost:3001/api/register', {
             name, 
             email, 
             password
         })
-        .then(response => console.log(response))
-        .catch(error => console.log(error))
+        .then(response => {
+            setState({
+                ...state,
+                name: '',
+                email: '',
+                password: '',
+                error: '',
+                success: response.data.message, 
+                buttonText: 'Submitted'
+            })
+        })
+        .catch(error => {
+            setState({...state, buttonText: 'Register', error: error.response.data.error})
+        })
     }
 
     return (
@@ -34,6 +47,8 @@ function Register() {
             <Nav></Nav>
             <div className="registration">
                 <h1 className="registration-heading">Register</h1>
+                {success && success}
+                {error && error}
                 <form action="" className="registration-form" onSubmit={handleSubmit} autoComplete="off">
                     <input onChange={handleChange('name')} type="text" className="registration-form-input" placeholder="name" autoComplete="new-name" value={name}/>
                     <input onChange={handleChange('email')} type="email" className="registration-form-input" placeholder="email" autoComplete="new-email" value={email}/>
