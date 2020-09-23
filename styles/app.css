@@ -1,6 +1,7 @@
 :root {
   --color-primary: #F7C244;
-  --color-grey-dark: #52595F; }
+  --color-grey-dark: #52595F;
+  --color-red-light: #E9C6C0; }
 
 .nav {
   display: flex; }
@@ -30,13 +31,13 @@
 .registration {
   display: grid;
   justify-content: center;
-  padding: 5rem 0 0 0;
-  grid-gap: 4rem; }
+  padding: 5rem 0 0 0; }
   .registration-heading {
     font-size: 4rem; }
   .registration-form {
     display: grid;
     grid-template-columns: minmax(min-content, 35rem);
+    margin-top: 4rem;
     grid-gap: 2rem; }
     .registration-form-input {
       width: 100%;
@@ -49,18 +50,32 @@
         outline: none;
         border-bottom: 0.2rem solid var(--color-grey-dark); }
     .registration-form-button {
-      margin: 1rem 0;
+      margin: 1rem 0 0 0;
       padding: 1rem;
       font-size: 1.5rem;
       background-color: var(--color-grey-dark);
       color: white;
       border: none;
+      border-radius: .5rem;
       transition: all .5s; }
       .registration-form-button:hover {
         background-color: var(--color-primary);
         color: var(--color-grey-dark);
         border: none;
         cursor: pointer; }
+  .registration-alert-success {
+    font-size: 1.5rem;
+    text-align: center;
+    background-color: var(--color-primary);
+    padding: 1rem;
+    border-radius: .5rem; }
+  .registration-alert-error {
+    font-size: 1.5rem;
+    text-align: center;
+    background-color: var(--color-red-light);
+    padding: 1rem;
+    border-radius: .5rem;
+    color: var(--color-grey-dark); }
 
 .contactpage {
   display: grid;

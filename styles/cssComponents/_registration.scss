@@ -2,7 +2,6 @@
     display: grid;
     justify-content: center;
     padding: 5rem 0 0 0;
-    grid-gap: 4rem;
 
     &-heading {
         font-size: 4rem;
@@ -11,6 +10,7 @@
     &-form {
         display: grid;
         grid-template-columns: minmax(min-content, 35rem);
+        margin-top: 4rem;
         grid-gap: 2rem;
         
         &-input {
@@ -29,12 +29,13 @@
         }
 
         &-button {
-            margin: 1rem 0;
+            margin: 1rem 0 0 0;
             padding: 1rem;
             font-size: 1.5rem;
             background-color: var(--color-grey-dark);
             color: white;
             border: none;
+            border-radius: .5rem;
             transition: all .5s;
             
             &:hover {
@@ -43,6 +44,26 @@
                 border: none;
                 cursor: pointer;
             }
+        }
+    }
+
+    &-alert {
+
+        &-success {
+            font-size: 1.5rem;
+            text-align: center;
+            background-color: var(--color-primary);
+            padding: 1rem;
+            border-radius: .5rem;
+        }
+
+        &-error {
+            font-size: 1.5rem;
+            text-align: center;
+            background-color: var(--color-red-light);
+            padding: 1rem;
+            border-radius: .5rem;
+            color: var(--color-grey-dark);
         }
     }
 }
