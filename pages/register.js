@@ -2,6 +2,7 @@ import React, { Component, useState } from 'react';
 import Nav from '../components/nav'
 import {showSuccessMessage, showErrorMessage} from '../helpers/alerts'
 import axios from 'axios'
+import {API} from '../config'
 
 function Register() {
     const [state, setState] = useState({
@@ -23,7 +24,7 @@ function Register() {
         e.preventDefault();
         setState({...state, buttonText: 'Registering'})
         try {
-            const response = await axios.post('http://localhost:3001/api/register', {
+            const response = await axios.post(`${API}/register`, {
                 name, 
                 email, 
                 password
@@ -40,7 +41,7 @@ function Register() {
             },
             )
         } catch (err) {
-            setState({...state, buttonText: 'Register', error: error.response.data.error})
+            setState({...state, buttonText: 'Register', error: err.response.data.error})
         }
     }
 
