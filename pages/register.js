@@ -49,6 +49,7 @@ function Register() {
         <div>
             <Nav></Nav>
             <div className="registration">
+                <div className="registration-container">
                 <h1 className="registration-heading">Register</h1>
                 <form action="" className="registration-form" onSubmit={handleSubmit} autoComplete="off">
                     <input onChange={handleChange('name')} type="text" className="registration-form-input" placeholder="name" autoComplete="new-name" value={name}/>
@@ -57,7 +58,8 @@ function Register() {
                     <button className="registration-form-button">{buttonText}</button>
                 </form>
                 {success && showSuccessMessage(success)}
-                {error && showErrorMessage(error)}              
+                {error && showErrorMessage(error)}
+                </div>              
             </div>
         </div>
     )

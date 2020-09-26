@@ -1,7 +1,12 @@
 .registration {
     display: grid;
-    justify-content: center;
+    grid-template-columns: repeat(3, [col-start] 1fr [col-end]);
     padding: 5rem 0 0 0;
+
+    &-container {
+        grid-column: 2/3;
+        text-align: center;
+    }
 
     &-heading {
         font-size: 4rem;
@@ -9,7 +14,6 @@
 
     &-form {
         display: grid;
-        grid-template-columns: minmax(min-content, 35rem);
         margin-top: 4rem;
         grid-gap: 2rem;
         

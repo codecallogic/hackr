@@ -30,13 +30,15 @@
 
 .registration {
   display: grid;
-  justify-content: center;
+  grid-template-columns: repeat(3, [col-start] 1fr [col-end]);
   padding: 5rem 0 0 0; }
+  .registration-container {
+    grid-column: 2/3;
+    text-align: center; }
   .registration-heading {
     font-size: 4rem; }
   .registration-form {
     display: grid;
-    grid-template-columns: minmax(min-content, 35rem);
     margin-top: 4rem;
     grid-gap: 2rem; }
     .registration-form-input {
