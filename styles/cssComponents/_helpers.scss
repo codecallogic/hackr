@@ -1,0 +1,19 @@
+.alert {
+
+    &-success {
+        font-size: 1.5rem;
+        text-align: center;
+        background-color: var(--color-primary);
+        padding: 1rem;
+        border-radius: .5rem;
+    }
+
+    &-error {
+        font-size: 1.5rem;
+        text-align: center;
+        background-color: var(--color-red-light);
+        padding: 1rem;
+        border-radius: .5rem;
+        color: var(--color-grey-dark);
+    }
+}

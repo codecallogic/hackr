@@ -7,7 +7,7 @@ import {API} from '../config'
 function Register() {
     const [state, setState] = useState({
         name: 'Jose',
-        email: 'jfguardiacp@gmail.com',
+        email: 'contact@fabricioguardia.com',
         password: 'aaaaaa',
         error: '',
         success: '', 
