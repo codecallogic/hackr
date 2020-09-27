@@ -28,26 +28,32 @@ const ActivateAccount = ({router}) => {
     const clickSubmit = async (e) => {
         e.preventDefault()
         setState({...state, buttonText: 'Activating'})
+
         try {
-            const response = await axios.post(`api/register/activate`, {token})
-            console.log(response)
-            setState({...state, name: '', token: '', buttonText: 'Activated', success: response.date.success})
-        } catch (err) {
-            setState({...state, buttonText: 'Activate Account', error: err.response.data.error})
+            const response = await axios.post(`${API}/register/activate`, {token})
+            setState({
+                ...state, 
+                name: '', 
+                token: '', 
+                buttonText: 'Activated', 
+                success: response.data.success ? response.data.success : ''})
+        } catch(err) {
+                setState({
+                    ...state, 
+                    buttonText: 'Activate Account', 
+                    error: err.response.data.error})
         }
     }
     
     return (
-    
     <div className="activation">
         <div className="activation-container">
             <h1 className="activation-heading">Hi {name}! Ready to activate your account</h1>
-            {success && showSuccessMessage}
-            {error && showErrorMessage}
             <button className="activation-button" onClick={clickSubmit} >{buttonText}</button>
+            {success && showSuccessMessage(success)}
+            {error && showErrorMessage(error)}
         </div>
     </div>
-
     )
 }
 
