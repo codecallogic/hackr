@@ -5,11 +5,12 @@ import Nav from '../components/nav';
 import {showSuccessMessage, showErrorMessage} from '../helpers/alerts'
 import axios from 'axios'
 import {API} from '../config'
+import {authenticate} from '../helpers/auth'
 
 function Login() {
     const [state, setState] = useState({
         email: 'contact@fabricioguardia.com',
-        password: 'aaaaaa',
+        password: '123456',
         error: '',
         success: '',
         buttonText: 'Login',
@@ -35,17 +36,11 @@ function Login() {
                 email, 
                 password
             })
-            console.log(response)
-            setState({
-                ...state,
-                email: '',
-                password: '',
-                error: response.data.error ? response.data.error : '',
-                success: response.data.success ? response.data.success : '', 
-                buttonText: response.data.error ? 'Login' : 'Logged in',
-            },
-            )
+            authenticate(response, () => {
+                Router.push('/')
+            })
         } catch (err) {
+            console.log(err)
             setState({...state, buttonText: 'Login', error: err.response.data.error})
         }
     }
