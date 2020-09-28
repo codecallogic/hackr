@@ -1,11 +1,11 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import Link from 'next/link'
 import Router from 'next/router'
 import Nav from '../components/nav';
 import {showSuccessMessage, showErrorMessage} from '../helpers/alerts'
 import axios from 'axios'
 import {API} from '../config'
-import {authenticate} from '../helpers/auth'
+import {authenticate, isAuth} from '../helpers/auth'
 
 function Login() {
     const [state, setState] = useState({
@@ -17,6 +17,10 @@ function Login() {
     })
 
     const {email, password, error, success, buttonText} = state
+
+    useEffect( () => {
+        isAuth() && Router.push('/')
+    }, [])
 
     const handleChange = (name) => (e) => {
         setState({
@@ -37,7 +41,7 @@ function Login() {
                 password
             })
             authenticate(response, () => {
-                Router.push('/')
+                isAuth() && isAuth().role == 'admin' ? Router.push('/admin') : Router.push('/user')
             })
         } catch (err) {
             console.log(err)
@@ -51,13 +55,14 @@ function Login() {
             <div className="login">
                 <div className="login-container">
                 <h1 className="login-heading">Login</h1>
+                <span>{JSON.stringify(isAuth())}</span>
                 <form action="" className="login-form" autoComplete="off" onSubmit={handleSubmit}>
                     <input onChange={handleChange('email')} type="email" className="login-form-input" placeholder="email" autoComplete="new-email" value={email}/>
                     <input type="password" onChange={handleChange('password')} className="login-form-input" placeholder="password" autoComplete="new-password" value={password}/>
                     <button className="login-form-button">{buttonText}</button>
                 </form>
                 {success && showSuccessMessage(success)}
-                {error && showErrorMessage(error)}
+                {error && showErrorMessage(error)}                
                 </div>              
             </div>
         </div>

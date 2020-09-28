@@ -2,10 +2,11 @@ import cookie from 'js-cookie'
 
 // set in cookie 
 export const setCookie = (key, value) => {
+    const date = new Date(new Date().getTime() + 60 * 10000);
     if(process.browser){ // if window.
-        cookie.set(key, value), {
-            expires: .0001
-        }
+        cookie.set(key, value, {
+            expires: date
+        })
     }
 }
 
@@ -18,7 +19,7 @@ export const removeCookie = (key) => {
 
 // get from cookie such as stored token
 // useful when we need to make a request to server with auth token
-export const getCookie = key => {
+export const getCookie = (key) => {
     if(process.browser){
         return cookie.get(key)
     }
@@ -47,7 +48,7 @@ export const authenticate = (response, next) => {
 
 // access user info from localstorage
 export const isAuth = () => {
-    if(process.brower){
+    if(process.browser){
         const cookieChecked = getCookie('token')
         if(cookieChecked){
             if(localStorage.getItem('user')){

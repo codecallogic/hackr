@@ -1,10 +1,17 @@
 import Nav from '../components/nav'
 
 export default function Home() {
+
+  const time = () => {
+    var date = new Date();
+    date.setTime(date.getTime());
+    console.log(date)
+  }
+  
   return (
     <div>
       <Nav></Nav>
-      Hello
+      <span onClick={time}>Hello</span>
     </div>
   )
 }
