@@ -25,6 +25,33 @@
       .nav-list-item:hover {
         background-color: var(--color-primary);
         padding: 1.6rem 0; }
+  .nav-list-right {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    list-style-type: none;
+    margin-right: 2rem; }
+    .nav-list-right-item {
+      transition: all .5s;
+      padding: 0 2rem; }
+      .nav-list-right-item > a {
+        text-decoration: none;
+        font-size: 2rem;
+        color: black; }
+      .nav-list-right-item > span {
+        text-decoration: none;
+        font-size: 2rem;
+        color: black;
+        cursor: pointer; }
+      .nav-list-right-item-logout {
+        text-decoration: none;
+        font-size: 2rem;
+        color: black;
+        cursor: pointer; }
+      .nav-list-right-item:hover {
+        background-color: var(--color-primary);
+        padding: 1.6rem 2rem; }
 
 #nprogress .bar {
   height: 0.6rem !important;

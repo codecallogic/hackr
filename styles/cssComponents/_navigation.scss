@@ -1,6 +1,5 @@
 .nav {
     display: flex;
-    // background-color: #F7C244;
 
     &-logo {
         font-size: 3rem;
@@ -16,7 +15,7 @@
 
         &-item {
             transition: all .5s;
-           & > a {
+            & > a {
                 text-decoration: none;
                 font-size: 2rem;
                 padding: 0 2rem;
@@ -28,7 +27,45 @@
                 background-color: var(--color-primary);
                 padding: 1.6rem 0;
             }
+        }
+    }
+
+    &-list-right {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        list-style-type: none;
+        margin-right: 2rem;
+
+        &-item {
+            transition: all .5s;
+            padding: 0 2rem;
             
+            & > a {
+                text-decoration: none;
+                font-size: 2rem;
+                color: black;
+            }
+
+            & > span {
+                text-decoration: none;
+                font-size: 2rem;
+                color: black;
+                cursor: pointer;
+            }
+
+            &-logout {
+                text-decoration: none;
+                font-size: 2rem;
+                color: black;
+                cursor: pointer;
+            }
+
+            &:hover {
+                background-color: var(--color-primary);
+                padding: 1.6rem 2rem;
+            }
         }
     }
 }
