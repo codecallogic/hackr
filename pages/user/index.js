@@ -1,24 +1,31 @@
-import {useState} from 'react'
 import Nav from '../../components/nav'
 import axios from 'axios'
+import {API} from '../../config'
+import {getCookie} from '../../helpers/auth'
 
-function User({todos}) {
-    const [state, setState] = useState({
-      
-    })
+function User({user}) {
     return (
         <div>
             <Nav></Nav>
-            {JSON.stringify(todos)}
+            {JSON.stringify(user)}
         </div>
   )
 }
 
-User.getInitialProps = async () => {
-    const response = await axios.get('https://jsonplaceholder.typicode.com/todos')
-    console.log(response)
-    return {
-        todos: response.data
+User.getInitialProps = async (context) => {
+    const token = getCookie('token', context.req)
+    try {
+        const response = await axios.get(`${API}/user`, {
+            headers: {
+                authorization: `Bearer ${token}`,
+                contentType: `application/json`
+            }
+        })
+        return {user: response.data}
+    } catch(err){
+        if(err.response.status == 401){
+            return {user: 'No user'}
+        }
     }
 }
 
