@@ -3,7 +3,7 @@ import Router from 'next/router';
 
 // set in cookie 
 export const setCookie = (key, value) => {
-    const date = new Date(new Date().getTime() + 60 * 10000);
+    const date = new Date(new Date().getTime() + 60 * 20000);
     if(process.browser){ // if window.
         cookie.set(key, value, {
             expires: date

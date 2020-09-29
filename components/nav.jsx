@@ -19,10 +19,14 @@ class Nav extends Component {
                     }
                 </ul>
                 <ul className="nav-list-right">
-                    <li></li>
                     {
                         isAuth() && isAuth().role == 'admin' && (
-                            <li className="nav-list-right-item"><Link href="/admin">Dashboard</Link></li>
+                            <li className="nav-list-right-item"><Link href="/admin">
+                                {isAuth().name && (<span>
+                                {
+                                    isAuth().name}, Dashboard</span>)
+                                }
+                            </Link></li>
                         )
                     }
 
