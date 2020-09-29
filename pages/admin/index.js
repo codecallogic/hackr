@@ -1,14 +1,13 @@
-import {useState} from 'react'
+import Nav from '../../components/nav'
+import withAdmin from '../withAdmin'
 
-function Admin() {
-    const [state, setState] = useState({
-      
-    })
+function Admin({user}) {
     return (
         <div>
-            Admin page
+            <Nav></Nav>
+            {JSON.stringify(user)}
         </div>
   )
 }
 
-export default Admin
+export default withAdmin(Admin)
