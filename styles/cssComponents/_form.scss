@@ -1,15 +1,7 @@
-.login {
+.form {
     display: grid;
     grid-template-columns: repeat(3, [col-start] 1fr [col-end]);
     padding: 5rem 0 0 0;
-
-    &-link {
-        text-decoration: none;
-        font-size: 1.5rem;
-        color: var(--color-grey-dark);
-        float: left;
-        padding-left: 1rem;
-    }
 
     &-container {
         grid-column: 2/3;
@@ -20,7 +12,7 @@
         font-size: 4rem;
     }
 
-    &-form {
+    &-elements {
         display: grid;
         margin-top: 4rem;
         grid-gap: 2rem;
@@ -30,7 +22,7 @@
             height: 5.5rem;
             font-size: 1.6rem;
             padding: 1.5rem 0 1.5rem 4rem;
-            border: .1.5rem solid black;
+            border: .1rem solid black;
             color: var(--color-grey-dark);
             border-radius: .8rem;
 
@@ -45,7 +37,7 @@
         }
 
         &-button {
-            margin: .5rem 0 2rem 0;
+            margin: 1rem 0 0 0;
             padding: 1rem;
             font-size: 1.5rem;
             background-color: var(--color-grey-dark);

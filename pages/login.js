@@ -62,8 +62,9 @@ function Login() {
                     <button className="login-form-button">{buttonText}</button>
                 </form>
                 {success && showSuccessMessage(success)}
-                {error && showErrorMessage(error)}                
-                </div>              
+                {error && showErrorMessage(error)}
+                <Link href="/auth/password/forgot"><a className="login-link">Forgot Password</a></Link>            
+                </div>            
             </div>
         </div>
         )
