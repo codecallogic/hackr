@@ -1,9 +1,8 @@
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 import Nav from '../../../components/nav';
 import axios from 'axios'
 import {showSuccessMessage, showErrorMessage} from '../../../helpers/alerts'
 import {API} from '../../../config'
-import Router from 'next/router'
 
 const ForgotPassword = () => {
     const [state, setState] = useState({
@@ -17,10 +16,10 @@ const ForgotPassword = () => {
     const { email, buttonText, success, error} = state
 
     const handleChange = e => {
-        setState({...state, email: e.target.value})
+        setState({...state, email: e.target.value, success: '', error: '', buttonText: 'Reset password'})
     }
 
-    const handleSubtmit = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         console.log('Post email to', email)
 
@@ -42,7 +41,7 @@ const ForgotPassword = () => {
         <div className="form">
             <div className="form-container">
                 <h1 className="form-heading">Forgot Password</h1>
-                <form className="form-elements" onSubmit={handleSubtmit}>
+                <form className="form-elements" onSubmit={handleSubmit}>
                     <input className="form-elements-input" type="email" value={email} onChange={handleChange} placeholder="Type in your email"/>
                     <button className="form-elements-button">{buttonText}</button>
                 </form>
