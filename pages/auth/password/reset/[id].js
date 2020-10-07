@@ -3,7 +3,7 @@ import Nav from '../../../../components/nav';
 import axios from 'axios'
 import {showSuccessMessage, showErrorMessage} from '../../../../helpers/alerts'
 import {API} from '../../../../config'
-import router, {withRouter} from 'next/router'
+import {withRouter} from 'next/router'
 import jwt from 'jsonwebtoken'
 
 const resetPassword = ({router}) => {
