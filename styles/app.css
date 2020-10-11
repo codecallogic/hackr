@@ -1,6 +1,7 @@
 :root {
   --color-primary: #F7C244;
   --color-grey-dark: #52595F;
+  --color-grey-light: #CEDDE2;
   --color-red-light: #E9C6C0;
   --color-blue-medium: #007ACC; }
 
@@ -236,6 +237,30 @@
         color: var(--color-grey-dark);
         border: none;
         cursor: pointer; }
+
+.heading-1 {
+  font-size: 3.2rem; }
+
+.dashboard-container {
+  padding: 4rem 8rem; }
+
+.dashboard-typography {
+  grid-column: 1/-1; }
+
+.dashboard-controls {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  padding: 4rem 0rem; }
+  .dashboard-controls a {
+    text-decoration: none;
+    color: var(--color-grey-dark);
+    font-size: 2rem;
+    padding: 2rem;
+    background-color: var(--color-grey-light);
+    text-align: center;
+    transition: all .5s; }
+    .dashboard-controls a:hover {
+      padding: 2.5rem; }
 
 .alert-success {
   font-size: 1.5rem;

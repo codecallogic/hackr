@@ -1,0 +1,29 @@
+.dashboard {
+    &-container {
+        padding: 4rem 8rem;
+    }
+
+    &-typography {
+        grid-column: 1/-1;
+    }
+
+    &-controls {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        padding: 4rem 0rem;
+
+        & a {
+            text-decoration: none;
+            color: var(--color-grey-dark);
+            font-size: 2rem;
+            padding: 2rem;
+            background-color: var(--color-grey-light);
+            text-align:center;
+            transition: all .5s;
+
+            &:hover {
+                padding: 2.5rem;
+            }
+        }
+    }
+}
