@@ -244,11 +244,11 @@
     .form-group-label {
       font-size: 1.8rem;
       font-weight: 100;
-      padding: 2rem; }
+      padding: 2rem;
+      text-align: left; }
       .form-group-label-file {
         font-size: 1.6rem;
         font-weight: 100;
-        text-align: center;
         border-radius: 1rem;
         box-shadow: 0 0 2px 1px var(--color-grey-dark);
         color: var(--color-grey-dark);

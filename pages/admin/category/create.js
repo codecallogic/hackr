@@ -9,19 +9,18 @@ const Create = ({user, token}) => {
     const [state, setState] = useState({
         name: '',
         content: '',
+        image: '',
         error: '',
         success: '',
-        formData: process.browser && new FormData(),
         buttonText: 'Create',
         imageUploadText: 'Upload Image',
     })
 
-    const {name, content, error, success, formData, buttonText, imageUploadText} = state
+    const {name, content, image, error, success, buttonText, imageUploadText} = state
     
     const handleChange = (name) => (e) => {
         const value = name == 'image' ? e.target.files[0] : e.target.value
         const imageName = name == 'image' ? e.target.files[0].name : imageUploadText
-        formData.set(name, value)
         setState({
             ...state,
             [name]: value,
@@ -34,7 +33,13 @@ const Create = ({user, token}) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         setState({...state, buttonText: 'Creating'})
-        // console.log(...formData)
+        let formData = new FormData()
+        formData.append('name', name)
+        formData.append('content', content)
+        formData.append('image', image)
+        for (var p of formData) {
+            console.log(p);
+        }
         try {
             const response = await axios.post(`${API}/category`, formData, {
                 headers: {
@@ -42,10 +47,10 @@ const Create = ({user, token}) => {
                 }
             })
             console.log('Category Create Response', response)
-            setState({...state, name: '', content: '', formData: '', buttonText: 'Created', imageUploadText: 'Upload Image', success: response.data ? `${response.data.name} is created` : '', error: response.data.error ? response.data.error : ''})
+            setState({...state, name: '', content: '', buttonText: 'Created', imageUploadText: 'Upload Image', success: response.data.success ? `${response.data.success.name} is created` : '', error: response.data.error ? 'Cannot save category' : ''})
         } catch(error) {
             console.log('Category Create Error', error)
-            setState({...state, name: '', content: '', buttonText: 'Create', error: error.response.data.error})
+            setState({...state, name: '', content: '', buttonText: 'Create', error: error.response.data.error ? error.response.data.error : 'Ooops something went wrong please contact support'})
         }
     }
     
