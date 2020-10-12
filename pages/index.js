@@ -1,17 +1,31 @@
 import Nav from '../components/nav'
+import axios from 'axios'
+import {API} from '../config'
+import Link from 'next/link'
 
-export default function Home() {
+const Home = ({categories}) => {
+  const listCategories = () => categories.map((c, i) => (
+    <Link key={i} href="/login">
+        <div className="home-category">
+            <img src={c.image && c.image.url} className="home-category-image"></img>
+            <div className="home-category-name">{c.name}</div>
+        </div>
+    </Link>
+  ))
 
-  const time = () => {
-    var date = new Date();
-    date.setTime(date.getTime());
-    console.log(date)
-  }
-  
   return (
     <div>
       <Nav></Nav>
-      <span onClick={time}>Hello</span>
+      <div className="home-categories">
+        {listCategories()}
+      </div>
     </div>
   )
 }
+
+Home.getInitialProps = async () => {
+  const response = await axios.get(`${API}/categories`)
+  return { categories: response.data}
+}
+
+export default Home
