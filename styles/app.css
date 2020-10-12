@@ -237,6 +237,74 @@
         color: var(--color-grey-dark);
         border: none;
         cursor: pointer; }
+  .form-group {
+    grid-column: 2/3;
+    display: flex;
+    flex-direction: column; }
+    .form-group-label {
+      font-size: 1.8rem;
+      font-weight: 100;
+      padding: 2rem; }
+      .form-group-label-file {
+        font-size: 1.6rem;
+        font-weight: 100;
+        text-align: center;
+        border-radius: 1rem;
+        box-shadow: 0 0 2px 1px var(--color-grey-dark);
+        color: var(--color-grey-dark);
+        margin: 2rem 0;
+        padding: 1rem; }
+        .form-group-label-file:hover {
+          color: white;
+          background-color: var(--color-grey-dark);
+          cursor: pointer; }
+    .form-group-input {
+      padding: 1.2rem;
+      font-size: 1.6rem;
+      border-radius: 1rem;
+      box-shadow: none;
+      border: none;
+      box-shadow: 0 0 1px .5px black;
+      transition: all .3s; }
+      .form-group-input:focus {
+        outline: none;
+        box-shadow: 0 0 3px 2px var(--color-primary);
+        border-radius: 1rem; }
+    .form-group-textarea {
+      font-family: inherit;
+      padding: 1.2rem;
+      font-size: 1.6rem;
+      border-radius: 1rem;
+      height: 7rem;
+      box-shadow: none;
+      border: none;
+      box-shadow: 0 0 1px .5px black;
+      transition: all .3s; }
+      .form-group-textarea:focus {
+        outline: none;
+        box-shadow: 0 0 3px 2px var(--color-primary);
+        border-radius: 1rem; }
+    .form-group-file {
+      padding: 1.2rem;
+      font-size: 1.6rem;
+      box-shadow: none;
+      border: none;
+      transition: all .3s; }
+      .form-group-file:focus {
+        outline: none;
+        box-shadow: 0 0 3px 2px var(--color-primary);
+        border-radius: 1rem; }
+    .form-group-button {
+      margin: 2rem;
+      padding: 1rem;
+      border: none;
+      font-size: 1.4rem; }
+      .form-group-button:hover {
+        background-color: var(--color-primary);
+        cursor: pointer; }
+      .form-group-button:focus {
+        cursor: pointer;
+        outline: 1px solid var(--color-primary); }
 
 .heading-1 {
   font-size: 3.2rem; }
