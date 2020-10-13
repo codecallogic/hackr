@@ -4,6 +4,7 @@ import withAdmin from "../../withAdmin"
 import axios from "axios"
 import {API} from "../../../config"
 import {showSuccessMessage, showErrorMessage} from '../../../helpers/alerts'
+import Resizer from 'react-image-file-resizer'
 
 const Create = ({user, token}) => {
     const [state, setState] = useState({
@@ -13,35 +14,50 @@ const Create = ({user, token}) => {
         error: '',
         success: '',
         buttonText: 'Create',
-        imageUploadText: 'Upload Image',
     })
 
-    const {name, content, image, error, success, buttonText, imageUploadText} = state
+    const {name, content, image, error, success, buttonText} = state
+
+    const [imageUploadButtonName, setImageUploadButtonName] = useState('Upload image')
     
     const handleChange = (name) => (e) => {
-        const value = name == 'image' ? e.target.files[0] : e.target.value
-        const imageName = name == 'image' ? e.target.files[0].name : imageUploadText
         setState({
             ...state,
-            [name]: value,
+            [name]: e.target.value,
             error: '',
             success: '',
-            imageUploadText: imageName
         })
+    }
+
+    const handleImage = (event) => {
+        let fileInput = false
+        if(event.target.files[0]) {
+            fileInput = true
+        }
+        setImageUploadButtonName(event.target.files[0].name)
+        if(fileInput) {
+            Resizer.imageFileResizer(
+                event.target.files[0],
+                800,
+                600,
+                'JPEG',
+                100,
+                0,
+                uri => {
+                    console.log(uri)
+                    setState({...state, image: uri, success: '', error: '' })
+                },
+                'base64'
+            );
+        }
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         setState({...state, buttonText: 'Creating'})
-        let formData = new FormData()
-        formData.append('name', name)
-        formData.append('content', content)
-        formData.append('image', image)
-        for (var p of formData) {
-            console.log(p);
-        }
+        setImageUploadButtonName('Upload image')
         try {
-            const response = await axios.post(`${API}/category`, formData, {
+            const response = await axios.post(`${API}/category`, {name, content, image}, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -70,8 +86,8 @@ const Create = ({user, token}) => {
                 </div>
                 <div className="form-group">
                     <label className="form-group-label-file">
-                        {imageUploadText}
-                        <input type="file" className="form-group-file" onChange={handleChange('image')} accept="image/*" hidden/>
+                        {imageUploadButtonName}
+                        <input type="file" className="form-group-file" onChange={handleImage} accept="image/*" hidden/>
                     </label>
                 </div>
                 <div className="form-group">
