@@ -5,6 +5,9 @@ import axios from "axios"
 import {API} from "../../../config"
 import {showSuccessMessage, showErrorMessage} from '../../../helpers/alerts'
 import Resizer from 'react-image-file-resizer'
+import dynamic from 'next/dynamic'
+const ReactQuill = dynamic(() => import('react-quill'), {ssr: false})
+import 'react-quill/dist/quill.bubble.css'
 
 const Create = ({user, token}) => {
     const [state, setState] = useState({
@@ -16,7 +19,9 @@ const Create = ({user, token}) => {
         buttonText: 'Create',
     })
 
-    const {name, content, image, error, success, buttonText} = state
+    const [content, setContent] = useState('')
+    
+    const {name, image, error, success, buttonText} = state
 
     const [imageUploadButtonName, setImageUploadButtonName] = useState('Upload image')
     
@@ -27,6 +32,12 @@ const Create = ({user, token}) => {
             error: '',
             success: '',
         })
+    }
+
+    const handleContent = (e) => {
+        console.log(e)
+        setContent(e)
+        setState({...state, success: '', error: '',})
     }
 
     const handleImage = (event) => {
@@ -82,7 +93,14 @@ const Create = ({user, token}) => {
                 </div>
                 <div className="form-group">
                     <label className="form-group-label">Content</label>
-                    <textarea type="text" className="form-group-textarea" onChange={handleChange('content')} value={content} required/>
+                    {/* <textarea type="text" className="form-group-textarea" onChange={handleChange('content')} value={content} required/> */}
+                    <ReactQuill 
+                        value={content}
+                        onChange={handleContent}
+                        placeholder="Write something..."
+                        className="form-group-react-quill"
+                        theme="bubble"
+                    />
                 </div>
                 <div className="form-group">
                     <label className="form-group-label-file">

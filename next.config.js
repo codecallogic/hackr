@@ -1,4 +1,5 @@
-module.exports = {
+const withCSS = require('@zeit/next-css')
+module.exports = withCSS({
     devIndicators: {
       autoPrerender: false,
     },
@@ -9,4 +10,4 @@ module.exports = {
       DOMAIN: 'http://localhost:3000',
       FB_APP_ID: 'AMC039VZDCMPQ023',
     }
-}
+})
