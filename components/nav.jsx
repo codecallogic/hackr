@@ -41,6 +41,14 @@ class Nav extends Component {
                     }
 
                     {
+                        isAuth() && isAuth().role == 'subscriber' && (
+                        <li className="nav-list-right-item"><Link href="/user/link/create">
+                            Create Link
+                        </Link></li>
+                        )
+                    }
+
+                    {
                         isAuth() && (
                             <li className="nav-list-right-item nav-list-right-item-logout" onClick={logout}>Logout</li>
                         )

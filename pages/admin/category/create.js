@@ -6,7 +6,7 @@ import {API} from "../../../config"
 import {showSuccessMessage, showErrorMessage} from '../../../helpers/alerts'
 import Resizer from 'react-image-file-resizer'
 import dynamic from 'next/dynamic'
-const ReactQuill = dynamic(() => import('react-quill'), {ssr: false})
+const ReactQuill = dynamic(() => import('react-quill'), {ssr: false, loading: () => <p>Loading ...</p>})
 import 'react-quill/dist/quill.bubble.css'
 
 const Create = ({user, token}) => {
