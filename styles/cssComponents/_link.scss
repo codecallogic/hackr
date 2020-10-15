@@ -1,0 +1,16 @@
+.link {
+    &-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+
+        &-select {
+            padding: 5rem 10rem;
+
+            &-category {
+                padding: 2rem 4rem;
+                font-size: 1.8rem;
+                color: var(--color-grey-dark);
+            }
+        }
+    }
+}
