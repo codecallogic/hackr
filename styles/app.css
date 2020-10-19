@@ -348,6 +348,10 @@
     .form-group-radio-input:checked ~ .form-group-radio-label .form-group-radio-button::after {
       opacity: 1; }
 
+.list {
+  max-height: 10rem;
+  overflow-y: scroll; }
+
 .heading-1 {
   font-size: 3.2rem; }
 

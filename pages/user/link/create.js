@@ -47,6 +47,20 @@ const Link = ({}) => {
         console.log(e.target.value)
         setState({...state, [e.target.name]: e.target.value})
     }
+
+    const handleToggle = (c) => (e) => {
+        // console.log(c)
+        const clickedCategory = categories.indexOf(c)
+        const all = [...categories]
+        if(clickedCategory == -1){
+            all.push(c)
+        }else{
+            all.splice(clickedCategory, 1)
+        }
+
+        setState({...state, categories: all, success: '', error: ''})
+        // console.log('Categories', all)
+    }
   
     return (
         <div>
@@ -57,17 +71,17 @@ const Link = ({}) => {
                     <div className="link-container-select-category">
                         Category
                     </div>
-                    <div className="form-container">
+                    <ul className="form-container list">
                         {state.categories !== null && state.loadedCategories.map( (c, i) => (
-                            <div key={i} className="form-group">
-                                <input type="radio" id={i} className="form-group-radio-input" name="categories" value={c.name} onChange={handleChange} required/>
+                            <li key={i} className="form-group">
+                                <input type="checkbox" id={i} className="form-group-radio-input" value={c.name} onChange={handleToggle(c._id)} required/>
                                 <label htmlFor={i} className="form-group-radio-label">
                                     <span className="form-group-radio-button"></span>
                                     {c.name}
                                 </label>
-                            </div>
+                            </li>
                         ))}
-                    </div>
+                    </ul>
                     <div className="link-container-select-category">
                         Type
                     </div>
@@ -125,6 +139,7 @@ const Link = ({}) => {
                     </form>
                 </div>
             </div>
+            {JSON.stringify(categories)}
         </div>
     )
 }
