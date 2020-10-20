@@ -4,9 +4,10 @@ import {API} from '../../../config'
 import {showSuccessMessage, showErrorMessage} from '../../../helpers/alerts'
 import Nav from '../../../components/nav'
 import withUser from '../../withUser'
-import dynamic from 'next/dynamic'
+import {getCookie, isAuth} from '../../../helpers/auth'
+import Router from 'next/router'
 
-const Link = ({}) => {
+const Link = ({user, token}) => {
     const [state, setState] = useState({
         title: '',
         url: '',
@@ -16,14 +17,19 @@ const Link = ({}) => {
         error: '',
         type: 'free',
         medium: 'video',
-        buttonText: 'Create'
+        buttonText: 'Create',
+        select: true,
     })
 
-    const {title, url, categories, loadedCategories, success, error, type, medium, buttonText} = state
+    const {title, url, categories, loadedCategories, success, error, type, medium, buttonText, select} = state
 
     useEffect( () => {
         loadCategories()
     }, [success])
+
+    useEffect( () => {
+        !isAuth() && Router.push('/login')
+    }, [])
 
     const loadCategories = async () => {
         const response = await axios.get(`${API}/categories`)
@@ -34,6 +40,22 @@ const Link = ({}) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         console.table({ title, url, categories, type, medium})
+        if(categories.length == 0){
+            setState({...state, select: false, error: 'Please select at least on category'})
+            return
+        }
+        try {
+            const response = await axios.post(`${API}/link`, {user, title, url, categories, type, medium}, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            setState({...state, title: '', url: '', success: 'Link is created', error: '', loadedCategories: null, categories: [], medium: 'video', type: 'free',})
+            console.log(response)
+        } catch (error) {
+            console.log('Error submitting form')
+            setState({...state, error: error.response.date.error})
+        }
     }
 
     const handleURLChange = (e) => {
@@ -59,7 +81,7 @@ const Link = ({}) => {
             all.splice(clickedCategory, 1)
         }
 
-        setState({...state, categories: all, success: '', error: ''})
+        setState({...state, categories: all, select: true, success: '', error: ''})
         // console.log('Categories', all)
     }
 
@@ -69,7 +91,7 @@ const Link = ({}) => {
             <li key={i} className="form-group">
                 <input type="checkbox" id={i} className="form-group-radio-input" value={c.name} onChange={handleToggle(c._id)} required/>
                 <label htmlFor={i} className="form-group-radio-label">
-                    <span className="form-group-radio-button"></span>
+                    <span className="form-group-radio-button" style={{border: select === false ? '2px solid red' : ''}}></span>
                     {c.name}
                 </label>
             </li>
@@ -140,6 +162,8 @@ const Link = ({}) => {
                             <div className="form-group">
                                 <button className="form-group-button">{buttonText}</button>
                             </div>
+                            {success && showSuccessMessage(success)}
+                            {error && showErrorMessage(error)}
                         </div>
                     </form>
                 </div>
@@ -148,4 +172,4 @@ const Link = ({}) => {
     )
 }
 
-export default Link
+export default withUser(Link)
