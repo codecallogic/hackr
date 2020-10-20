@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 const Home = ({categories}) => {
   const listCategories = () => categories.map((c, i) => (
-    <Link key={i} href="/login">
+    <Link key={i} href={`/links/${c.slug}`}>
         <div className="home-category">
             <img src={c.image && c.image.url} className="home-category-image"></img>
             <div className="home-category-name">{c.name}</div>
