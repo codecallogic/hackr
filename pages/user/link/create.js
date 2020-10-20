@@ -4,18 +4,18 @@ import {API} from '../../../config'
 import {showSuccessMessage, showErrorMessage} from '../../../helpers/alerts'
 import Nav from '../../../components/nav'
 import withUser from '../../withUser'
-
+import dynamic from 'next/dynamic'
 
 const Link = ({}) => {
     const [state, setState] = useState({
         title: '',
         url: '',
         categories: [],
-        loadedCategories: [],
+        loadedCategories: null,
         success: '',
         error: '',
-        type: '',
-        medium: '',
+        type: 'free',
+        medium: 'video',
         buttonText: 'Create'
     })
 
@@ -32,7 +32,8 @@ const Link = ({}) => {
     }
 
     const handleSubmit = async (e) => {
-        console.log('POST TO SERVER')
+        e.preventDefault()
+        console.table({ title, url, categories, type, medium})
     }
 
     const handleURLChange = (e) => {
@@ -44,7 +45,7 @@ const Link = ({}) => {
     }
 
     const handleChange = (e) => {
-        console.log(e.target.value)
+        // console.log(e.target.value)
         setState({...state, [e.target.name]: e.target.value})
     }
 
@@ -61,7 +62,21 @@ const Link = ({}) => {
         setState({...state, categories: all, success: '', error: ''})
         // console.log('Categories', all)
     }
-  
+
+    const showCategories = () => {
+        return <ul className="form-container list">
+        {state.loadedCategories !== null && state.loadedCategories.map( (c, i) => (
+            <li key={i} className="form-group">
+                <input type="checkbox" id={i} className="form-group-radio-input" value={c.name} onChange={handleToggle(c._id)} required/>
+                <label htmlFor={i} className="form-group-radio-label">
+                    <span className="form-group-radio-button"></span>
+                    {c.name}
+                </label>
+            </li>
+        ))}
+        </ul>
+    }
+
     return (
         <div>
             <Nav></Nav>
@@ -71,30 +86,20 @@ const Link = ({}) => {
                     <div className="link-container-select-category">
                         Category
                     </div>
-                    <ul className="form-container list">
-                        {state.categories !== null && state.loadedCategories.map( (c, i) => (
-                            <li key={i} className="form-group">
-                                <input type="checkbox" id={i} className="form-group-radio-input" value={c.name} onChange={handleToggle(c._id)} required/>
-                                <label htmlFor={i} className="form-group-radio-label">
-                                    <span className="form-group-radio-button"></span>
-                                    {c.name}
-                                </label>
-                            </li>
-                        ))}
-                    </ul>
+                    {state.loadedCategories !== null ? showCategories() : <p>Loading ...</p>}
                     <div className="link-container-select-category">
                         Type
                     </div>
                     <div className="form-container">
                         <div className="form-group">
-                            <input type="radio" id="free" className="form-group-radio-input" name="type" value="Free" onChange={handleChange} required/>
+                            <input type="radio" id="free" className="form-group-radio-input" name="type" value="Free" onChange={handleChange} checked={type == 'free'} value="free" required/>
                             <label htmlFor="free" className="form-group-radio-label">
                                 <span className="form-group-radio-button"></span>
                                 Free
                             </label>
                         </div>
                         <div className="form-group">
-                            <input type="radio" id="paid" className="form-group-radio-input" name="type" value="Paid" onChange={handleChange} required/>
+                            <input type="radio" id="paid" className="form-group-radio-input" name="type" value="Paid" onChange={handleChange} value="paid" required/>
                             <label htmlFor="paid" className="form-group-radio-label">
                                 <span className="form-group-radio-button"></span>
                                 Paid
@@ -106,14 +111,14 @@ const Link = ({}) => {
                     </div>
                     <div className="form-container">
                         <div className="form-group">
-                            <input type="radio" id="video" className="form-group-radio-input" name="medium" value="Video" onChange={handleChange} required/>
+                            <input type="radio" id="video" className="form-group-radio-input" name="medium" value="video" onChange={handleChange} checked={medium == 'video'}required/>
                             <label htmlFor="video" className="form-group-radio-label">
                                 <span className="form-group-radio-button"></span>
                                 Video
                             </label>
                         </div>
                         <div className="form-group">
-                            <input type="radio" id="book" className="form-group-radio-input" name="medium" value="Book" onChange={handleChange} required/>
+                            <input type="radio" id="book" className="form-group-radio-input" name="medium" value="book" onChange={handleChange} required/>
                             <label htmlFor="book" className="form-group-radio-label">
                                 <span className="form-group-radio-button"></span>
                                 Book
@@ -139,7 +144,6 @@ const Link = ({}) => {
                     </form>
                 </div>
             </div>
-            {JSON.stringify(categories)}
         </div>
     )
 }
