@@ -35,7 +35,6 @@ const Create = ({user, token}) => {
     }
 
     const handleContent = (e) => {
-        console.log(e)
         setContent(e)
         setState({...state, success: '', error: '',})
     }
@@ -55,7 +54,7 @@ const Create = ({user, token}) => {
                 100,
                 0,
                 uri => {
-                    console.log(uri)
+                    // console.log(uri)
                     setState({...state, image: uri, success: '', error: '' })
                 },
                 'base64'
@@ -67,8 +66,9 @@ const Create = ({user, token}) => {
         e.preventDefault()
         setState({...state, buttonText: 'Creating'})
         setImageUploadButtonName('Upload image')
+        // console.log(image)
         try {
-            const response = await axios.post(`${API}/category`, {name, content, image}, {
+            const response = await axios.post(`${API}/category`, {user, name, content, image}, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -86,33 +86,33 @@ const Create = ({user, token}) => {
             <Nav></Nav>
             <form onSubmit={handleSubmit} className="form">
                 <div className="form-container">
-                <div className="form-group">
-                    <label className="form-group-label">Category</label>
-                    <input type="text" className="form-group-input" onChange={handleChange('name')} value={name} required/>
+                    <div className="form-group">
+                        <label className="form-group-label">Category</label>
+                        <input type="text" className="form-group-input" onChange={handleChange('name')} value={name} required/>
 
-                </div>
-                <div className="form-group">
-                    <label className="form-group-label">Content</label>
-                    {/* <textarea type="text" className="form-group-textarea" onChange={handleChange('content')} value={content} required/> */}
-                    <ReactQuill 
-                        value={content}
-                        onChange={handleContent}
-                        placeholder="Write something..."
-                        className="form-group-react-quill"
-                        theme="bubble"
-                    />
-                </div>
-                <div className="form-group">
-                    <label className="form-group-label-file">
-                        {imageUploadButtonName}
-                        <input type="file" className="form-group-file" onChange={handleImage} accept="image/*" hidden/>
-                    </label>
-                </div>
-                <div className="form-group">
-                    <button className="form-group-button">{buttonText}</button>
-                </div>
-                {success && showSuccessMessage(success)}
-                {error && showErrorMessage(error)}
+                    </div>
+                    <div className="form-group">
+                        <label className="form-group-label">Content</label>
+                        {/* <textarea type="text" className="form-group-textarea" onChange={handleChange('content')} value={content} required/> */}
+                        <ReactQuill 
+                            value={content}
+                            onChange={handleContent}
+                            placeholder="Write something..."
+                            className="form-group-react-quill"
+                            theme="bubble"
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label className="form-group-label-file">
+                            {imageUploadButtonName}
+                            <input type="file" className="form-group-file" onChange={handleImage} accept="image/*" hidden/>
+                        </label>
+                    </div>
+                    <div className="form-group">
+                        <button className="form-group-button">{buttonText}</button>
+                    </div>
+                    {success && showSuccessMessage(success)}
+                    {error && showErrorMessage(error)}
                 </div>
             </form>
         </div>
