@@ -6,9 +6,11 @@ import withUser from '../withUser'
 import renderHTML from 'react-render-html'
 import moment from 'moment'
 
-const Links = ({query, category, links, totalLinks, linksLimit}) => {
-    console.log(links)
+const Links = ({query, category, links, totalLinks, linksLimit, linkSkip}) => {
     const [allLinks, setAllLinks] = useState(links)
+    const [limit, setLimit] = useState(linksLimit)
+    const [skip, setSkip] = useState(0)
+    const [size, setSize] = useState(totalLinks)
   
     const listOfLinks = () => 
         allLinks.map( (l, i) => (
@@ -23,7 +25,7 @@ const Links = ({query, category, links, totalLinks, linksLimit}) => {
                             <span className="category-main-link-side-date">{moment(l.createdAt).fromNow()} by {l.postedBy.name}</span>
                             <span className="category-main-link-side-clicks">clicks {l.clicks}</span>
                         </div>
-                        <span className="category-main-link-badge">{l.type} / {l.medium} {l.categories.map( (c, i) => (<span className="category-main-link-categories"> {c.name} </span>))}</span>
+                        <span className="category-main-link-badge">{l.type} / {l.medium} {l.categories.map( (c, i) => (<span key={i} className="category-main-link-categories"> {c.name} </span>))}</span>
                     </div>
                 </div>
                 <div className="category-side">
@@ -33,6 +35,28 @@ const Links = ({query, category, links, totalLinks, linksLimit}) => {
                 </div>
             </div>
         ))
+
+        const loadMore = async () => {
+            let toSkip = skip + limit
+            const response = await axios.post(`${API}/category/${query.slug}`, {skip: toSkip, limit})
+            setAllLinks([...allLinks, ...response.data.links])
+            console.log(allLinks)
+            console.log(response.data.links.length)
+            setSize(response.data.links.length)
+            setSkip(toSkip)
+        }
+
+        const loadmoreButton = () => {
+            return (
+                size > 0 && size >= limit && (
+                    <div className="category-container">
+                        <div className="category-main">
+                            <button className="category-main-button" onClick={loadMore}>Load more</button>
+                        </div>
+                    </div>
+                )
+            )
+        }
     
   return (
     <div>
@@ -49,6 +73,7 @@ const Links = ({query, category, links, totalLinks, linksLimit}) => {
             </div>
         </div>
         {listOfLinks()}
+        {loadmoreButton()}
     </div>
   )
 }
@@ -61,8 +86,9 @@ Links.getInitialProps = async ({query, req}) => {
         query,
         category: response.data.category,
         links: response.data.links,
-        totalLinks: response.data.links.lenght,
-        linksLimit: limit
+        totalLinks: response.data.links.length,
+        linksLimit: limit,
+        linkSkip: skip
     }
 }
 
