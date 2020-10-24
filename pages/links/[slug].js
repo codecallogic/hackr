@@ -5,6 +5,7 @@ import {API} from '../../config'
 import withUser from '../withUser'
 import renderHTML from 'react-render-html'
 import moment from 'moment'
+import InfiniteScroll from 'react-infinite-scroller'
 
 const Links = ({query, category, links, totalLinks, linksLimit, linkSkip}) => {
     const [allLinks, setAllLinks] = useState(links)
@@ -37,6 +38,7 @@ const Links = ({query, category, links, totalLinks, linksLimit, linkSkip}) => {
         ))
 
         const loadMore = async () => {
+            // setTimeout( async function() {
             let toSkip = skip + limit
             const response = await axios.post(`${API}/category/${query.slug}`, {skip: toSkip, limit})
             setAllLinks([...allLinks, ...response.data.links])
@@ -44,19 +46,20 @@ const Links = ({query, category, links, totalLinks, linksLimit, linkSkip}) => {
             console.log(response.data.links.length)
             setSize(response.data.links.length)
             setSkip(toSkip)
+            // }, 200)
         }
 
-        const loadmoreButton = () => {
-            return (
-                size > 0 && size >= limit && (
-                    <div className="category-container">
-                        <div className="category-main">
-                            <button className="category-main-button" onClick={loadMore}>Load more</button>
-                        </div>
-                    </div>
-                )
-            )
-        }
+        // const loadmoreButton = () => {
+        //     return (
+        //         size > 0 && size >= limit && (
+        //             <div className="category-container">
+        //                 <div className="category-main">
+        //                     <button className="category-main-button" onClick={loadMore}>Load more</button>
+        //                 </div>
+        //             </div>
+        //         )
+        //     )
+        // }
     
   return (
     <div>
@@ -73,7 +76,20 @@ const Links = ({query, category, links, totalLinks, linksLimit, linkSkip}) => {
             </div>
         </div>
         {listOfLinks()}
-        {loadmoreButton()}
+        {/* {loadmoreButton()} */}
+        <div className="category-container">
+            <div className="category-main">
+            <InfiniteScroll
+                pageStart={0}
+                loadMore={loadMore}
+                hasMore={size > 0 && size >= limit}
+                loader={
+                    <img src="/images/loader.gif" alt="Loading"/>
+                }
+            >
+            </InfiniteScroll>
+            </div>
+        </div>
     </div>
   )
 }
