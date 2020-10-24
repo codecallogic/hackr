@@ -18,11 +18,12 @@
             font-size: 2rem;
             padding: 2rem;
             background-color: var(--color-grey-light);
-            text-align:center;
-            transition: all .5s;
-
+            text-align:center;  
+            margin: 0 1rem 0 0; 
+            transition: all 1s;
+            
             &:hover {
-                padding: 2.5rem;
+                border: .1rem solid var(--color-grey-dark);
             }
         }
     }

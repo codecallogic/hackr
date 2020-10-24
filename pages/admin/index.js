@@ -9,6 +9,7 @@ function Admin({user}) {
             <div className="dashboard-container">
                 <span className="dashboard-typography heading-1">Admin Dashboard</span>
                 <div className="dashboard-controls">
+                    <Link href="/admin/category/read">All Categories</Link>
                     <Link href="/admin/category/create">Create Category</Link>
                 </div>
             </div>

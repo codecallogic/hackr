@@ -24,5 +24,21 @@
         &:hover {
             transform: translateY(-1rem);
         }
+
+        &-controls {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 2rem;
+
+            &-update {
+                background-color: var(--color-primary);
+                color: white;
+            }
+
+            &-delete {
+                background-color: var(--color-red-medium);
+                color: white; 
+            }
+        }
     }
 }

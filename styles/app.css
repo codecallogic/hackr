@@ -361,6 +361,11 @@
 .heading-2 {
   font-size: 2.5rem; }
 
+.dashboard-button {
+  padding: 1.5rem;
+  border: none;
+  cursor: pointer; }
+
 .dashboard-container {
   padding: 4rem 8rem; }
 
@@ -378,9 +383,10 @@
     padding: 2rem;
     background-color: var(--color-grey-light);
     text-align: center;
-    transition: all .5s; }
+    margin: 0 1rem 0 0;
+    transition: all 1s; }
     .dashboard-controls a:hover {
-      padding: 2.5rem; }
+      border: 0.1rem solid var(--color-grey-dark); }
 
 .home-categories {
   display: grid;
@@ -400,6 +406,16 @@
     color: var(--color-grey-dark); }
   .home-category:hover {
     transform: translateY(-1rem); }
+  .home-category-controls {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2rem; }
+    .home-category-controls-update {
+      background-color: var(--color-primary);
+      color: white; }
+    .home-category-controls-delete {
+      background-color: var(--color-red-medium);
+      color: white; }
 
 .link-container {
   display: grid;
