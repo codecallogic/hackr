@@ -24,6 +24,10 @@ const Read = ({user, token}) => {
         setState({...state, categories: response.data})
     }
 
+    const confirmDelete = (slug) => {
+        console.log(slug)
+    }
+
     const listCategories = () => (
         categories.map( (c, i) => (
             <Link key={c._id} href={`/links/${c.slug}`}>
@@ -31,8 +35,12 @@ const Read = ({user, token}) => {
                     <img src={c.image && c.image.url} className="home-category-image" alt={c.name}></img>
                     <div className="home-category-name">{c.name}</div>
                     <div className="home-category-controls">
-                        <button className="home-category-controls-update dashboard-button">Update</button>
-                        <button className="home-category-controls-delete dashboard-button">Delete</button>
+                        <Link href={`/admin/category/${c.slug}`}>
+                            <button className="home-category-controls-update dashboard-button">Update</button>
+                        </Link>
+            
+                        <button onClick={ () => confirmDelete(c.slug)}className="home-category-controls-delete dashboard-button">Delete</button>
+                        
                     </div>
                 </div>
             </Link>
