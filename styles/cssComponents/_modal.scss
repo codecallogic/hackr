@@ -1,0 +1,39 @@
+.modal {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0, .6);
+
+    &-content {
+        padding: 2rem;
+        background-color: white;
+        display: grid;
+        grid-template-columns: 1fr;
+        border-radius: 2rem;
+
+        &-close {
+            font-size: 2rem;
+            display: flex;
+            justify-self: end;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+        }
+
+        &-title {
+            padding: 1rem;
+        }
+
+        &-controls {
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;
+            padding: 0 2rem;
+            margin: 2rem 0 0 0;
+        }
+    }
+}

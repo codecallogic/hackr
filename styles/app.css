@@ -361,9 +361,26 @@
 .heading-2 {
   font-size: 2.5rem; }
 
+.heading-4 {
+  font-size: 2rem; }
+
 .dashboard-button {
   padding: 1.5rem;
   border: none;
+  cursor: pointer; }
+
+.button-confirm {
+  padding: 1.6rem;
+  border: none;
+  background-color: var(--color-primary);
+  border-radius: 1rem;
+  cursor: pointer; }
+
+.button-cancel {
+  padding: 1.6rem;
+  border: none;
+  background-color: var(--color-grey-light);
+  border-radius: 1rem;
   cursor: pointer; }
 
 .dashboard-container {
@@ -493,6 +510,37 @@
     font-size: 1.8rem;
     text-align: right;
     padding: 0 5rem; }
+
+.modal {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6); }
+  .modal-content {
+    padding: 2rem;
+    background-color: white;
+    display: grid;
+    grid-template-columns: 1fr;
+    border-radius: 2rem; }
+    .modal-content-close {
+      font-size: 2rem;
+      display: flex;
+      justify-self: end;
+      border: none;
+      background-color: transparent;
+      cursor: pointer; }
+    .modal-content-title {
+      padding: 1rem; }
+    .modal-content-controls {
+      width: 100%;
+      display: flex;
+      justify-content: space-evenly;
+      padding: 0 2rem;
+      margin: 2rem 0 0 0; }
 
 .alert-success {
   font-size: 1.5rem;
