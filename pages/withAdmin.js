@@ -26,10 +26,10 @@ const withAdmin = Page => {
         }
 
         if(user == null){
-            context.res.writeHead(302, {
+            context.res.writeHead(301, {
                 Location: '/'
-            })
-            context.res.end()
+            });
+            context.res.end();
             console.log('Redirect')
         }else{
             return {

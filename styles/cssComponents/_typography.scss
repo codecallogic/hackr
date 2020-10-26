@@ -8,6 +8,17 @@
 
 .heading-4 {
     font-size: 2rem;
+    padding: 1rem 0 1rem .5rem;
+}
+
+.heading-6 {
+    font-size: 1.4rem;
+}
+
+.sub-heading {
+    &-url {
+        color: var(--color-red-medium);
+    }
 }
 
 .dashboard-button {

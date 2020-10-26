@@ -4,7 +4,7 @@ import {getCookie} from '../helpers/auth'
 
 const withUser = Page => {
     const WithAuthUser = props => <Page {...props} />
-    WithAuthUser.getInitialProps = async context => {
+    WithAuthUser.getInitialProps = async (context)  => {
         const token = getCookie('token', context.req)
         let user = null
         let userLinks = []
@@ -28,11 +28,11 @@ const withUser = Page => {
         }
 
         if(user == null){
-            context.res.writeHead(302, {
+            context.res.writeHead(301, {
                 Location: '/'
-            })
-            context.res.end()
-            console.log('Redirect')
+            });
+            context.res.end();
+            // console.log('Redirect')
         }else{
             return {
                 ...(Page.getInitialProps ? await Page.getInitialProps(context) : {}),
