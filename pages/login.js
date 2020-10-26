@@ -9,8 +9,8 @@ import {authenticate, isAuth} from '../helpers/auth'
 
 function Login() {
     const [state, setState] = useState({
-        email: 'contact@fabricioguardia.com',
-        password: 'aaaaaa',
+        email: '',
+        password: '',
         error: '',
         success: '',
         buttonText: 'Login',

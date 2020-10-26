@@ -5,7 +5,7 @@ function User({user, token}) {
     return (
         <div>
             <Nav></Nav>
-            {JSON.stringify(user)}
+            
         </div>
   )
 }
