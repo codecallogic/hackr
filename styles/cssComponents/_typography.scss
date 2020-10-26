@@ -43,4 +43,40 @@
         border-radius: 1rem;
         cursor: pointer;
     }
+
+    &-delete {
+        &-link {
+            border: none;
+            background-color: transparent;
+            font-size: 1rem;
+            margin-left: 1rem;
+            color: var(--color-red-medium);
+            cursor: pointer;
+            transition: all .5s;
+
+            &:hover {
+                color: white;
+                background-color: var(--color-primary);
+                padding: .7rem;
+            }
+        }
+    }
+
+    &-update {
+        &-link {
+            border: none;
+            background-color: transparent;
+            font-size: 1rem;
+            margin-left: 1rem;
+            color: var(--color-green-light);
+            cursor: pointer;
+            transition: all .5s;
+
+            &:hover {
+                color: white;
+                background-color: var(--color-primary);
+                padding: .7rem;
+            }
+        }
+    }
 }
