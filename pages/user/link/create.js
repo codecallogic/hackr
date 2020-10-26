@@ -39,7 +39,7 @@ const Link = ({user, token}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.table({ title, url, categories, type, medium})
+        // console.table({ title, url, categories, type, medium})
         if(categories.length == 0){
             setState({...state, select: false, error: 'Please select at least on category'})
             return
@@ -51,10 +51,10 @@ const Link = ({user, token}) => {
                 }
             })
             setState({...state, title: '', url: '', success: 'Link is created', error: '', loadedCategories: null, categories: [], medium: 'video', type: 'free',})
-            console.log(response)
+            // console.log(response)
         } catch (error) {
-            console.log('Error submitting form')
-            setState({...state, error: error.response.date.error})
+            console.log('Error submitting form', error)
+            setState({...state, error: error.response.data.error})
         }
     }
 

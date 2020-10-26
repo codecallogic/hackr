@@ -28,10 +28,12 @@ export const getCookie = (key, req) => {
 }
 
 export const getCookieFromBrowser = (key) => {
+    // console.log(key)
     return cookie.get(key)
 }
 
 export const getCookieFromServer = (key, req) => {
+    // console.log(req.headers.cookie)
     if(!req.headers.cookie){
         return undefined
     }

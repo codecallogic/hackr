@@ -42,8 +42,8 @@ const Links = ({query, category, links, totalLinks, linksLimit, linkSkip}) => {
             let toSkip = skip + limit
             const response = await axios.post(`${API}/category/${query.slug}`, {skip: toSkip, limit})
             setAllLinks([...allLinks, ...response.data.links])
-            console.log(allLinks)
-            console.log(response.data.links.length)
+            // console.log(allLinks)
+            // console.log(response.data.links.length)
             setSize(response.data.links.length)
             setSkip(toSkip)
             // }, 200)

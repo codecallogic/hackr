@@ -7,6 +7,7 @@ const withAdmin = Page => {
     WithAdminUser.getInitialProps = async context => {
         const token = getCookie('token', context.req)
         let user = null
+        let userLinks = []
         if(token){
             try {
                 const response = await axios.get(`${API}/admin`, {
@@ -15,7 +16,8 @@ const withAdmin = Page => {
                         contentType: `application/json`
                     }
                 })
-                user = response.data
+                user = response.data.user
+                userLinks = response.data.links
             } catch(err){
                 if(err.response.status == 401){
                     user = null
@@ -33,7 +35,8 @@ const withAdmin = Page => {
             return {
                 ...(Page.getInitialProps ? await Page.getInitialProps(context) : {}),
                 user,
-                token
+                token,
+                userLinks
             }
         }
     }

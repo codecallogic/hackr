@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react'
+import Nav from '../../../components/nav'
 import JWT from 'jsonwebtoken'
 import axios from 'axios'
 import {showSuccessMessage, showErrorMessage} from '../../../helpers/alerts'
@@ -46,12 +47,15 @@ const ActivateAccount = ({router}) => {
     }
     
     return (
-    <div className="activation">
-        <div className="activation-container">
-            <h1 className="activation-heading">Hi {name}! Ready to activate your account</h1>
-            <button className="activation-button" onClick={clickSubmit} >{buttonText}</button>
-            {success && showSuccessMessage(success)}
-            {error && showErrorMessage(error)}
+    <div>
+        <Nav></Nav>
+        <div className="activation">
+            <div className="activation-container">
+                <h1 className="activation-heading">Hi {name}! Ready to activate your account</h1>
+                <button className="activation-button" onClick={clickSubmit} >{buttonText}</button>
+                {success && showSuccessMessage(success)}
+                {error && showErrorMessage(error)}
+            </div>
         </div>
     </div>
     )
