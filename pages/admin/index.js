@@ -8,9 +8,9 @@ function Admin({user}) {
             <Nav></Nav>
             <div className="dashboard-container">
                 <span className="dashboard-typography heading-1">Admin Dashboard</span>
-                <div className="dashboard-controls">
+                <div className="dashboard-container-controls">
                     <Link href="/admin/category/read">All Categories</Link>
-                    <a href="/admin/category/create">Create Category</a>
+                    <Link href="/admin/category/create">Create Category</Link>
                 </div>
             </div>
         </div>

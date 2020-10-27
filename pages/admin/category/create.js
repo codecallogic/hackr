@@ -10,6 +10,7 @@ const ReactQuill = dynamic(() => import('react-quill'), {ssr: false, loading: ()
 import 'react-quill/dist/quill.bubble.css'
 
 const Create = ({user, token}) => {
+    console.log(user)
     const [state, setState] = useState({
         name: '',
         content: '',

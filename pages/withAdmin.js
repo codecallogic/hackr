@@ -16,9 +16,11 @@ const withAdmin = Page => {
                         contentType: `application/json`
                     }
                 })
+                // console.log(response.data)
                 user = response.data.user
                 userLinks = response.data.links
             } catch(err){
+                // console.log(err)
                 if(err.response.status == 401){
                     user = null
                 }
@@ -30,7 +32,7 @@ const withAdmin = Page => {
                 Location: '/'
             });
             context.res.end();
-            console.log('Redirect')
+            // console.log('Redirect')s
         }else{
             return {
                 ...(Page.getInitialProps ? await Page.getInitialProps(context) : {}),

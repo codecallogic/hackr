@@ -7,17 +7,18 @@ import withUser from '../../withUser'
 import {getCookie, isAuth} from '../../../helpers/auth'
 import Router from 'next/router'
 
-const Link = ({user, token}) => {
+const Update = ({oldLink, user, token}) => {
+    console.log(oldLink)
     const [state, setState] = useState({
-        title: '',
-        url: '',
-        categories: [],
-        loadedCategories: null,
+        title: oldLink.title,
+        url: oldLink.url,
+        categories: oldLink.categories,
+        loadedCategories: [],
         success: '',
         error: '',
-        type: 'free',
-        medium: 'video',
-        buttonText: 'Create',
+        type: oldLink.type,
+        medium: oldLink.medium,
+        buttonText: 'Update',
         select: true,
     })
 
@@ -34,7 +35,7 @@ const Link = ({user, token}) => {
     const loadCategories = async () => {
         const response = await axios.get(`${API}/categories`)
         setState({...state, loadedCategories: response.data})
-        // console.log(response)
+        console.log(response)
     }
 
     const handleSubmit = async (e) => {
@@ -45,13 +46,13 @@ const Link = ({user, token}) => {
             return
         }
         try {
-            const response = await axios.post(`${API}/link`, {user, title, url, categories, type, medium}, {
+            const response = await axios.put(`${API}/link/${oldLink._id}`, {user, title, url, categories, type, medium}, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
-            setState({...state, title: '', url: '', success: 'Link is created', error: '', loadedCategories: null, categories: [], medium: 'video', type: 'free',})
-            Router.push('/user')
+            setState({...state, success: 'Link is updated', error: '', loadedCategories: null})
+            // Router.push('/user')
             // console.log(response)
         } catch (error) {
             console.log('Error submitting form', error)
@@ -90,7 +91,7 @@ const Link = ({user, token}) => {
         return <ul className="form-container list">
         {state.loadedCategories !== null && state.loadedCategories.map( (c, i) => (
             <li key={i} className="form-group">
-                <input type="checkbox" id={i} className="form-group-radio-input" value={c.name} onChange={handleToggle(c._id)} required/>
+                <input type="checkbox" id={i} checked={categories.includes(c._id)} className="form-group-radio-input" value={c.name} onChange={handleToggle(c._id)} required/>
                 <label htmlFor={i} className="form-group-radio-label">
                     <span className="form-group-radio-button" style={{border: select === false ? '2px solid red' : ''}}></span>
                     {c.name}
@@ -105,7 +106,7 @@ const Link = ({user, token}) => {
             <Nav></Nav>
             <div className="link-container">
                 <div className="link-container-select">
-                    <div className="heading-1">Submit a Link</div>
+                    <div className="heading-1">Update Link</div>
                     <div className="link-container-select-category">
                         Category
                     </div>
@@ -122,7 +123,7 @@ const Link = ({user, token}) => {
                             </label>
                         </div>
                         <div className="form-group">
-                            <input type="radio" id="paid" className="form-group-radio-input" name="type" value="Paid" onChange={handleChange} value="paid" required/>
+                            <input type="radio" id="paid" className="form-group-radio-input" name="type" value="Paid" onChange={handleChange} checked={type == 'paid'} value="paid" required/>
                             <label htmlFor="paid" className="form-group-radio-label">
                                 <span className="form-group-radio-button"></span>
                                 Paid
@@ -173,4 +174,9 @@ const Link = ({user, token}) => {
     )
 }
 
-export default withUser(Link)
+Update.getInitialProps = async ({req, token, query}) => {
+    const response = await axios.get(`${API}/link/${query.id}`)
+    return { oldLink: response.data, token}
+}
+
+export default withUser(Update)

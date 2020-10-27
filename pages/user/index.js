@@ -39,7 +39,7 @@ const User = ({user, userLinks, token}) => {
                     ))}
                     <span key={i} className="dashboard-links-content-clicks">{l.clicks} clicks</span>
                     <button name="modal" onClick={ (e) => confirmDelete(e, l._id)}className="dashboard-links-content button-delete-link">Delete</button>
-                    <Link href={`/user/link/${l.slug}`}className="dashboard-links-content button-update-link">Update</Link>
+                    <Link href={`/user/link/${l._id}`}className="dashboard-links-content button-update-link">Update</Link>
                 </div>
             </div>
         ))

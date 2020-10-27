@@ -55,7 +55,7 @@ const Read = ({user, token}) => {
         categories.map( (c, i) => (
             <div key={c._id} className="home-category">
                 <Link key={c._id} href={`/links/${c.slug}`}>
-                <img src={c.image && c.image.url} className="home-category-image" alt={c.name}></img>
+                    <img src={c.image && c.image.url} className="home-category-image" alt={c.name}></img>
                 </Link>
                 <div className="home-category-name">{c.name}</div>
                 <div className="home-category-controls">
