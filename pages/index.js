@@ -4,6 +4,7 @@ import {API} from '../config'
 import Link from 'next/link'
 
 const Home = ({categories}) => {
+  // console.log(categories)
   const listCategories = () => categories.map((c, i) => (
     <Link key={i} href={`/links/${c.slug}`}>
         <div className="home-category">

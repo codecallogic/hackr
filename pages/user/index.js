@@ -30,7 +30,7 @@ const User = ({user, userLinks, token}) => {
                     <div className="sub-heading-url">{l.url}</div>
                 </a>
                 <div className="dashboard-links-list-moment">
-                    <span>{moment(l.createdAt).fromNow()} by {l.postedBy.name} </span>
+                    <span>{moment(l.createdAt).fromNow()}</span>
                 </div>
                 <div className="dashboard-links-content">
                     <span>{l.type} / {l.medium}</span>

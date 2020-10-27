@@ -8,7 +8,7 @@ import {getCookie, isAuth} from '../../../helpers/auth'
 import Router from 'next/router'
 
 const Update = ({oldLink, user, token}) => {
-    console.log(oldLink)
+    console.log(token)
     const [state, setState] = useState({
         title: oldLink.title,
         url: oldLink.url,
@@ -70,7 +70,7 @@ const Update = ({oldLink, user, token}) => {
 
     const handleChange = (e) => {
         // console.log(e.target.value)
-        setState({...state, [e.target.name]: e.target.value})
+        setState({...state, [e.target.name]: e.target.value, error: '', success: ''})
     }
 
     const handleToggle = (c) => (e) => {
@@ -135,14 +135,14 @@ const Update = ({oldLink, user, token}) => {
                     </div>
                     <div className="form-container">
                         <div className="form-group">
-                            <input type="radio" id="video" className="form-group-radio-input" name="medium" value="video" onChange={handleChange} checked={medium == 'video'}required/>
+                            <input type="radio" id="video" className="form-group-radio-input" name="medium" value="video" onChange={handleChange} checked={medium == 'video'} required/>
                             <label htmlFor="video" className="form-group-radio-label">
                                 <span className="form-group-radio-button"></span>
                                 Video
                             </label>
                         </div>
                         <div className="form-group">
-                            <input type="radio" id="book" className="form-group-radio-input" name="medium" value="book" onChange={handleChange} required/>
+                            <input type="radio" id="book" className="form-group-radio-input" name="medium" value="book" checked={medium == 'book'} onChange={handleChange} required/>
                             <label htmlFor="book" className="form-group-radio-label">
                                 <span className="form-group-radio-button"></span>
                                 Book
@@ -174,9 +174,9 @@ const Update = ({oldLink, user, token}) => {
     )
 }
 
-Update.getInitialProps = async ({req, token, query}) => {
+Update.getInitialProps = async ({req, query}) => {
     const response = await axios.get(`${API}/link/${query.id}`)
-    return { oldLink: response.data, token}
+    return { oldLink: response.data}
 }
 
 export default withUser(Update)
