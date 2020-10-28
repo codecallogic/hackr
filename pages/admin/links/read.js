@@ -41,7 +41,7 @@ const Links = ({links, totalLinks, linksLimit, linkSkip, token}) => {
                                 <button name='modal' onClick={ (e) => confirmDelete(e, l._id)}className="category-main-link-delete">
                                     Delete
                                 </button> 
-                                <Link href={`/admin/link/${l._id}`}>
+                                <Link href={`/user/link/${l._id}`}>
                                     <button className="category-main-link-update">Update</button>
                                 </Link>
                             </span>

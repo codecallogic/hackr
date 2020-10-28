@@ -4,7 +4,7 @@ import {API} from '../../../config'
 import {showSuccessMessage, showErrorMessage} from '../../../helpers/alerts'
 import Nav from '../../../components/nav'
 import withUser from '../../withUser'
-import {getCookie, isAuth} from '../../../helpers/auth'
+import {isAuth} from '../../../helpers/auth'
 import Router from 'next/router'
 
 const Update = ({oldLink, user, token}) => {
@@ -45,8 +45,17 @@ const Update = ({oldLink, user, token}) => {
             setState({...state, select: false, error: 'Please select at least on category'})
             return
         }
+
+        let dynamicUpdateURL
+
+        if(isAuth() && isAuth().role == 'admin'){
+            dynamicUpdateURL = `${API}/link/admin/${oldLink._id}`
+        }else {
+            dynamicUpdateURL = `${API}/link/${oldLink._id}`
+        }
+
         try {
-            const response = await axios.put(`${API}/link/${oldLink._id}`, {user, title, url, categories, type, medium}, {
+            const response = await axios.put(`${dynamicUpdateURL}`, {user, title, url, categories, type, medium}, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
