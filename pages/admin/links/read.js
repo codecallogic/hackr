@@ -7,14 +7,20 @@ import renderHTML from 'react-render-html'
 import moment from 'moment'
 import InfiniteScroll from 'react-infinite-scroller'
 import {getCookie} from '../../../helpers/auth'
+import Link from 'next/link'
 
 const Links = ({links, totalLinks, linksLimit, linkSkip, token}) => {
-    // console.log(token)
-
+    // console.log(totalLinks)
+    const [state, setState] = useState({
+        modal: false,
+        id: null
+    })
     const [allLinks, setAllLinks] = useState(links)
     const [limit, setLimit] = useState(linksLimit)
-    const [skip, setSkip] = useState(0)
+    const [skip, setSkip] = useState(linkSkip)
     const [size, setSize] = useState(totalLinks)
+
+    const {modal, id} = state
   
     const listOfLinks = () => 
         allLinks.map( (l, i) => (
@@ -29,7 +35,17 @@ const Links = ({links, totalLinks, linksLimit, linkSkip, token}) => {
                             <span className="category-main-link-side-date">{moment(l.createdAt).fromNow()} by {l.postedBy.name}</span>
                             <span className="category-main-link-side-clicks">clicks {l.clicks}</span>
                         </div>
-                        <span className="category-main-link-badge">{l.type} / {l.medium} {l.categories.map( (c, i) => (<span key={i} className="category-main-link-categories"> {c.name} </span>))}</span>
+                        <div className="category-main-link-sub-container">
+                            <span className="category-main-link-badge">{l.type} / {l.medium} 
+                                {l.categories.map( (c, i) => (<span key={i} className="category-main-link-categories"> {c.slug} </span>))}
+                                <button name='modal' onClick={ (e) => confirmDelete(e, l._id)}className="category-main-link-delete">
+                                    Delete
+                                </button> 
+                                <Link href={`/admin/link/${l._id}`}>
+                                    <button className="category-main-link-update">Update</button>
+                                </Link>
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div className="category-side">
@@ -42,20 +58,61 @@ const Links = ({links, totalLinks, linksLimit, linkSkip, token}) => {
 
     const loadMore = async () => {
         let toSkip = skip + limit
-        const response = await axios.post(`${API}/links`, {skip, limit}, {
+        const response = await axios.post(`${API}/links`, {skip: toSkip, limit}, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             }
         )
+        setSize(response.data.length < limit ? 0 : response.data.length)
         setAllLinks([...allLinks, ...response.data])
-        // console.log(allLinks)
-        // console.log(response.data.links.length)
-        setSize(response.data.length)
         setSkip(toSkip)
     }
+
+    const toggle = (e) => {
+        setState({...state, [e.target.name]: !modal})
+    }
+
+    const confirmDelete = (e, id) => {
+        e.preventDefault()
+        setState({...state, [e.target.name]: !modal, id: id})
+    }
+
+    const displayModal = () => (
+        <div className="modal">
+            <div className="modal-content">
+                <button name='modal' className="modal-content-close" onClick={toggle}>&times;</button>
+                <div className="modal-content-title heading-4">
+                    Are you sure you want to delete this category?
+                </div>
+                <div className="modal-content-controls">
+                    <button className="button-confirm" name='delete' onClick={handleDelete}>Confirm</button>
+                    <button className="button-cancel" name='cancel' onClick={handleDelete}>Cancel</button>
+                </div>
+            </div>
+        </div>
+    )
     
-    
+    const handleDelete = async (e) => {
+        e.preventDefault()
+        if(e.target.name == 'delete'){
+            try {
+                const response = await axios.delete(`${API}/link/admin/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                })
+                console.log(response)
+                setState({...state, modal: false})
+                process.browser && window.location.reload()
+            } catch (error) {
+                console.log('ERROR DELETING', error)
+            }
+        }else{
+            setState({...state, modal: false})
+        }
+    }
+
   return (
     <div>
         <Nav></Nav>
@@ -73,6 +130,7 @@ const Links = ({links, totalLinks, linksLimit, linkSkip, token}) => {
             </InfiniteScroll>
             </div>
         </div>
+        {modal === true && displayModal()}
     </div>
   )
 }
