@@ -100,6 +100,13 @@
         color: var(--color-grey-dark);
         border: none;
         cursor: pointer; }
+  .registration-link-container-select {
+    padding: 0rem 0rem; }
+    .registration-link-container-select-category {
+      padding: 1rem 4rem 4rem 2rem;
+      font-size: 1.8rem;
+      text-align: left;
+      color: var(--color-grey-dark); }
 
 .contactpage {
   display: grid;
