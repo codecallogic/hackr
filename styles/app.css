@@ -2,6 +2,7 @@
   --color-primary: #F7C244;
   --color-grey-dark: #52595F;
   --color-grey-light: #CEDDE2;
+  --color-gray-light-2: #E4E6E9;
   --color-red-light: #E9C6C0;
   --color-blue-medium: #007ACC;
   --color-red-medium: #DB5D58;
@@ -86,6 +87,8 @@
       .registration-form-input:focus {
         outline: none;
         border: 0.2rem solid var(--color-primary); }
+      .registration-form-input:disabled {
+        background-color: var(--color-gray-light-2); }
     .registration-form-button {
       margin: 1rem 0 0 0;
       padding: 1rem;

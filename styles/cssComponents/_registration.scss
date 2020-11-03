@@ -34,6 +34,10 @@
                 outline: none;
                 border: .2rem solid var(--color-primary);
             }
+
+            &:disabled {
+                background-color: var(--color-gray-light-2);
+            }
         }
 
         &-button {

@@ -12,6 +12,7 @@ function Admin({user}) {
                     <Link href="/admin/category/read">All Categories</Link>
                     <Link href="/admin/links/read">All Links</Link>
                     <Link href="/admin/category/create">Create Category</Link>
+                    <Link href="/user/profile/update">Update Profile</Link>
                 </div>
             </div>
         </div>
