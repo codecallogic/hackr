@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import Nav from '../../components/nav'
 import axios from 'axios'
 import {API} from '../../config'
@@ -12,28 +12,50 @@ const Links = ({query, category, links, totalLinks, linksLimit, linkSkip}) => {
     const [limit, setLimit] = useState(linksLimit)
     const [skip, setSkip] = useState(0)
     const [size, setSize] = useState(totalLinks)
+    const [trending, setTrending] = useState([])
+
+    useEffect(() => {
+        loadTrending()
+      }, [])
+
+    const loadTrending = async () => {
+        const response = await axios.get(`${API}/links/trending/${category.slug}`)
+        console.log(response.data)
+        setTrending(response.data)
+    }
+
+    const handleClick = async (linkId) => {
+        const response = await axios.put(`${API}/click-count`, {linkId})
+        loadTrending()
+    }
+
+    const trendingLinks = () => 
+        trending.map( (l, i) => (
+            <div key={i} className="category-main-link">
+                <a className="category-main-link-click" href={l.url} target="_blank" onClick={ () => handleClick(l._id)}>
+                    <span className="category-main-link-click-title">{l.title}</span>
+                    <span className="category-main-link-click-url">{l.url}</span>
+                </a>
+                <div className="category-main-link-side">
+                    <span className="category-main-link-side-date">{moment(l.createdAt).fromNow()} by {l.postedBy.name}</span>
+                    <span className="category-main-link-side-clicks">clicks {l.clicks}</span>
+                </div>
+                <span className="category-main-link-badge">{l.type} / {l.medium} {l.categories.map( (c, i) => (<span key={i} className="category-main-link-categories"> {c.name} </span>))}</span>
+            </div>
+        ))
   
     const listOfLinks = () => 
         allLinks.map( (l, i) => (
-            <div key={i} className="category-container">
-                <div className="category-main">
-                    <div className="category-main-link">
-                        <a className="category-main-link-click" href={l.url} target="_blank">
-                            <span className="category-main-link-click-title">{l.title}</span>
-                            <span className="category-main-link-click-url">{l.url}</span>
-                        </a>
-                        <div className="category-main-link-side">
-                            <span className="category-main-link-side-date">{moment(l.createdAt).fromNow()} by {l.postedBy.name}</span>
-                            <span className="category-main-link-side-clicks">clicks {l.clicks}</span>
-                        </div>
-                        <span className="category-main-link-badge">{l.type} / {l.medium} {l.categories.map( (c, i) => (<span key={i} className="category-main-link-categories"> {c.name} </span>))}</span>
-                    </div>
+            <div key={i} className="category-main-link">
+                <a className="category-main-link-click" href={l.url} target="_blank" onClick={ () => handleClick(t._id)}>
+                    <span className="category-main-link-click-title">{l.title}</span>
+                    <span className="category-main-link-click-url">{l.url}</span>
+                </a>
+                <div className="category-main-link-side">
+                    <span className="category-main-link-side-date">{moment(l.createdAt).fromNow()} by {l.postedBy.name}</span>
+                    <span className="category-main-link-side-clicks">clicks {l.clicks}</span>
                 </div>
-                <div className="category-side">
-                    <div className="category-side-popular">
-                        {moment(l.createdAt).fromNow()}
-                    </div>
-                </div>
+                <span className="category-main-link-badge">{l.type} / {l.medium} {l.categories.map( (c, i) => (<span key={i} className="category-main-link-categories"> {c.name} </span>))}</span>
             </div>
         ))
 
@@ -75,7 +97,14 @@ const Links = ({query, category, links, totalLinks, linksLimit, linkSkip}) => {
                 <img className="category-side-image" src={category.image.url} alt=""/>
             </div>
         </div>
-        {listOfLinks()}
+        <div className="category-container">
+            <div className="category-main">
+            {listOfLinks()}
+            </div>
+            <div className="category-side">
+            {trendingLinks()}
+            </div>
+        </div>
         {/* {loadmoreButton()} */}
         <div className="category-container">
             <div className="category-main">
@@ -88,6 +117,8 @@ const Links = ({query, category, links, totalLinks, linksLimit, linkSkip}) => {
                 }
             >
             </InfiniteScroll>
+            </div>
+            <div className="category-side">                
             </div>
         </div>
     </div>
