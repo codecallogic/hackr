@@ -381,7 +381,8 @@
   font-size: 3.2rem; }
 
 .heading-2 {
-  font-size: 2.5rem; }
+  font-size: 2.5rem;
+  font-weight: 400; }
 
 .heading-4 {
   font-size: 2rem;
@@ -531,6 +532,9 @@
     .home-category-controls-delete {
       background-color: var(--color-red-medium);
       color: white; }
+
+.home-trending-heading {
+  margin-left: 5rem; }
 
 .link-container {
   display: grid;
