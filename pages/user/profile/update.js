@@ -4,11 +4,10 @@ import Nav from '../../../components/nav'
 import {showSuccessMessage, showErrorMessage} from '../../../helpers/alerts'
 import axios from 'axios'
 import {API} from '../../../config'
-import {isAuth} from '../../../helpers/auth'
+import {updateUser} from '../../../helpers/auth'
 import withUser from '../../withUser'
 
 function Profile({user, token}) {
-    console.log(user)
     const [state, setState] = useState({
         name: user.name,
         email: user.email,
@@ -32,10 +31,6 @@ function Profile({user, token}) {
     }
 
     const {name, email, password, error, success, buttonText, loadedCategories, categories, select} = state
-
-    // useEffect( () => {
-    //     isAuth() && Router.push('/')
-    // }, [])
 
     const handleChange = (name) => (e) => {
         setState({...state, [name]: e.target.value, error: '', success: '', buttonText: 'Update'})
@@ -82,15 +77,18 @@ function Profile({user, token}) {
                     Authorization: `Bearer ${token}`
                 }
             })
-            console.log(response)
-            setState({
-                ...state,
-                error: response.data.error ? response.data.error : '',
-                success: response.data.success ? response.data.success : '', 
-                buttonText: response.data.error ? 'Update' : 'Profile Updated',
-            },
-            )
+            // console.log(response)
+            updateUser(response.data, () => {
+                setState({
+                    ...state,
+                    error: response.data.error ? response.data.error : '',
+                    success: response.data.success ? response.data.success : '', 
+                    buttonText: response.data.error ? 'Update' : 'Profile Updated',
+                }
+                )    
+            })
         } catch (err) {
+            // console.log(err)
             setState({...state, buttonText: 'Update', error: err.response.data.error})
         }
     }

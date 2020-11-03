@@ -1,6 +1,7 @@
 import {API} from '../config'
 import axios from 'axios'
 import {getCookie} from '../helpers/auth'
+import Router from 'next/router'
 
 const withUser = Page => {
     const WithAuthUser = props => <Page {...props} />
