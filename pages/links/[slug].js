@@ -1,8 +1,8 @@
 import {useState, useEffect} from 'react'
 import Nav from '../../components/nav'
 import axios from 'axios'
-import {API} from '../../config'
-import withUser from '../withUser'
+import {API , APP_NAME} from '../../config'
+import Head from 'next/head'
 import renderHTML from 'react-render-html'
 import moment from 'moment'
 import InfiniteScroll from 'react-infinite-scroller'
@@ -13,6 +13,18 @@ const Links = ({query, category, links, totalLinks, linksLimit, linkSkip}) => {
     const [skip, setSkip] = useState(0)
     const [size, setSize] = useState(totalLinks)
     const [trending, setTrending] = useState([])
+    const stripHTML = data => data.replace(/<\/?[^>]+(>|$)/g, '');
+
+    const head = () => (
+        <Head>
+            <title>{category.name} | {APP_NAME} </title>
+            <meta name="description" content={stripHTML(category.content)}/>
+            <meta property="og:title" content={category.name} />
+            <meta property="og:description" content={stripHTML(category.content.substring(0, 160))} />
+            <meta property="og:image" content={category.image.url} />
+            <meta property="og:image:secure_url" content={category.image.url} />
+        </Head>
+    )
 
     useEffect(() => {
         loadTrending()
@@ -84,7 +96,8 @@ const Links = ({query, category, links, totalLinks, linksLimit, linkSkip}) => {
         // }
     
   return (
-    <div>
+    <>
+        {head()}
         <Nav></Nav>
         <div className="category-container">
             <div className="category-main">
@@ -121,7 +134,7 @@ const Links = ({query, category, links, totalLinks, linksLimit, linkSkip}) => {
             <div className="category-side">                
             </div>
         </div>
-    </div>
+    </>
   )
 }
 

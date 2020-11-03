@@ -4,7 +4,7 @@ module.exports = withCSS({
       autoPrerender: false,
     },
     publicRuntimeConfig: {
-      APP_NAME: 'Hackr',
+      APP_NAME: 'LinkNest',
       API: 'http://localhost:3001/api',
       PRODUCTION: false,
       DOMAIN: 'http://localhost:3000',
