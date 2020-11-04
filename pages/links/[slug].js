@@ -32,7 +32,7 @@ const Links = ({query, category, links, totalLinks, linksLimit, linkSkip}) => {
 
     const loadTrending = async () => {
         const response = await axios.get(`${API}/links/trending/${category.slug}`)
-        console.log(response.data)
+        // console.log(response.data)
         setTrending(response.data)
     }
 
