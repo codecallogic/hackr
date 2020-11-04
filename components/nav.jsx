@@ -6,7 +6,7 @@ class Nav extends Component {
     render () {
         return (
             <div className="nav">
-                <div className="nav-logo"> &gt; hackr.io</div>
+                <div className="nav-logo"> &gt; Nestliinks</div>
                 <ul className='nav-list'>
                     <li className="nav-list-item"><Link href="/">Home</Link></li>
                     {

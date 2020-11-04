@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }) {
   return <>
     <Head>
         <React.Fragment>
-        <title>Hackr</title>
+        <title>NestLinks</title>
         <link
           href="//fonts.googleapis.com/css?family=Poppins:300,400,500,600,700%7CRoboto:300,400,500,600,700"
           rel="stylesheet"
