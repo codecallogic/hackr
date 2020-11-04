@@ -15,6 +15,7 @@ const Home = ({categories}) => {
 
   const loadTrending = async () => {
     const response = await axios.get(`${API}/links/trending`)
+    console.log('Hello')
     setTrending(response.data)
   }
 
