@@ -10,7 +10,7 @@ The ultimate place to share links of your favorite technologies.
 
 ## GETTING STARTED
 
-[<b>AWS Host</b>](http://nestliinks.com/)
+[<b>Website</b>](http://nestliinks.com/)
 
 ## NEXT STEPS
 
