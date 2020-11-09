@@ -8,6 +8,7 @@ import moment from 'moment'
 import InfiniteScroll from 'react-infinite-scroller'
 
 const Links = ({query, category, links, totalLinks, linksLimit, linkSkip}) => {
+    console.log(links)
     const [allLinks, setAllLinks] = useState(links)
     const [limit, setLimit] = useState(linksLimit)
     const [skip, setSkip] = useState(0)
@@ -32,7 +33,7 @@ const Links = ({query, category, links, totalLinks, linksLimit, linkSkip}) => {
 
     const loadTrending = async () => {
         const response = await axios.get(`${API}/links/trending/${category.slug}`)
-        // console.log(response.data)
+        console.log(response.data)
         setTrending(response.data)
     }
 
