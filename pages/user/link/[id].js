@@ -35,7 +35,6 @@ const Update = ({oldLink, user, token}) => {
     const loadCategories = async () => {
         const response = await axios.get(`${API}/categories`)
         setState({...state, loadedCategories: response.data})
-        console.log(response)
     }
 
     const handleSubmit = async (e) => {

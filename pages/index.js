@@ -59,7 +59,7 @@ const Home = ({categories}) => {
         {listCategories()}
       </div>
       <div className="home-trending">
-  <h2 className="home-trending-heading heading-2">Trending {trending.length}</h2>
+      <h2 className="home-trending-heading heading-2">Trending {trending.length}</h2>
         {listOfLinks()}
       </div>
     </div>

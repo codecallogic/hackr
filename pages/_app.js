@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }) {
         </React.Fragment>
     </Head>
     <Component {...pageProps} />
-  </>
+   </>
 }
 
 export default MyApp
