@@ -2,7 +2,7 @@
 
 ## GETTING STARTED
 
-[<b>Website</b>](http://nestliinks.com/)
+[<b>Click here to visit website</b>](http://nestliinks.com/)
 
 The ultimate place to share links of your favorite tech topics.
 
